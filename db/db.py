@@ -83,3 +83,24 @@ class NotesDB:
         self._execute(query, params)
         row = self._cur.fetchone()
         return(row)
+
+    # ------------------ EDITING ------------------
+    
+    def _editID(self, id: int, msg: str):
+        """
+            Edit note based on ID
+
+            Return the entire row
+        """
+        
+        query = """
+            UPDATE notes SET note=%(msg)s WHERE id=%(id)s RETURNING *;
+        """
+        params = {
+            'msg': msg,
+            'id': id
+        }
+        self._execute(query, params)
+        row = self._cur.fetchone()
+        return(row)
+        
