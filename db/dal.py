@@ -1,5 +1,3 @@
-from typing import List
-
 from note import Note
 from .db import NotesDB
 
@@ -9,13 +7,15 @@ class NotesDAL:
 
     def insert(self, msg: str) -> Note:
         print("DAL Insert")
-        note = self._db._insert("notes", msg)
+        note = self._db._insert(msg)
         return(note)
 
-    def viewNotes(self) -> List:
-        print("DAL View")
+    def getNotes(self):
+        notes = []
         rows = self._db._getAll()
-        print(rows)
+        for i in rows:
+            notes.append(Note(i[0], i[1]))
+        return(notes)
 
     def deleteNote(self, noteId: int) -> Note:
         print("DAL Delete")
