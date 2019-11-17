@@ -9,6 +9,7 @@ class NotesDB:
         self._cur.execute(query, params)
         self._db.commit() # Update database
 
+    # ------------------ INSERTION ------------------
 
     def _insert(self, msg: str):
         """
@@ -23,6 +24,8 @@ class NotesDB:
         }
         self._execute(query, params)
         return(self._cur.fetchone()[0]) # Return id
+
+    # ------------------ GETTERS ------------------
 
     def _getAll(self):
         """
@@ -61,4 +64,22 @@ class NotesDB:
         self._execute(query, params)
         row = self._cur.fetchone()
         return(row)
-        
+
+    # ------------------ DELETION ------------------
+
+    def _deleteID(self, id: int):
+        """
+            Delete entry based on ID
+
+            Return the row that was deleted
+        """
+
+        query = """
+            DELETE FROM notes WHERE id=%(id)s RETURNING *;
+        """
+        params = {
+            'id': id
+        }
+        self._execute(query, params)
+        row = self._cur.fetchone()
+        return(row)

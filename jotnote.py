@@ -41,11 +41,16 @@ def deleteNote(noteId: int):
     """
     print("---- Deleting Note #{} ----".format(noteId))
 
-    # Query DB to get orig note
-
     # Make deletion call to DB
+    dal = NotesDAL()
+    delNote = dal.deleteNote(noteId)
 
     # Output deleted note
+    if delNote is not None:
+        print("Deleted...\n")
+        delNote.printMsg()
+    else:
+        print("Note #{} does not exist".format(noteId))
 
 def editNote(noteId: int):
     """

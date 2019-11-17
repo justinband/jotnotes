@@ -18,7 +18,12 @@ class NotesDAL:
         return(notes)
 
     def deleteNote(self, noteId: int) -> Note:
-        print("DAL Delete")
+        row = self._db._deleteID(noteId)
+        
+        if row is not None:
+            return(Note(row[0], row[1]))
+        else:
+            return(None)
 
     def editNote(self, noteId: int, newMsg: str) -> Note:
         print("DAL View")
