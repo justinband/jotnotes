@@ -10,6 +10,13 @@ class NotesDAL:
         row = self._db._getNoteID(id)
         return(Note(row[0], row[1]))
 
+    def getNoteID(self, id: int) -> Note:
+        row = self._db._getNoteID(id)
+        if row is not None:
+             return(Note(row[0], row[1]))
+        else:
+            return(None)
+
     def getNotes(self):
         notes = []
         rows = self._db._getAll()
@@ -26,4 +33,10 @@ class NotesDAL:
             return(None)
 
     def editNote(self, noteId: int, newMsg: str) -> Note:
-        print("DAL View")
+        row = self._db._editID(noteId, newMsg)
+        
+        if row is not None:
+            return(Note(row[0], row[1]))
+        else:
+            return(None)
+            

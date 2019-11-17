@@ -60,16 +60,27 @@ def editNote(noteId: int):
     """
     print("---- Edit Note #{} ----".format(noteId))
 
-    # Query DB to get note
+    dal = NotesDAL()
 
-    # Change note msg in db
+    # Query DB to get original note
+    oldNote = dal.getNoteID(noteId)
+    if oldNote is not None:
+        # Query DB to change note
+        newMsg = input("Change message to: ")
+        editNote = dal.editNote(noteId, newMsg)
 
-    # Show user changes made to the note
+        if editNote is not None:
+            # Show user changes made to the note
+            print("\nOld:")
+            oldNote.printMsg()
+            print("\nNew:")
+            editNote.printMsg()
+        else:
+            print("Failed to change message...")
+    else:
+        print("Note #{} does not exist".format(noteId))
 
 if __name__ == "__main__":
-    # conn = psycopg2.connect(database="jotnotes", user="postgres")
-    # curr = conn.cursor()
-
     parser = argparse.ArgumentParser()
 
     parser.add_argument("-v", "--view", help="View all notes", action="store_true") # Shows user all the notes
