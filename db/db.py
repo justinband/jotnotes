@@ -17,7 +17,7 @@ class NotesDB:
         """
 
         query = """
-            INSERT INTO notes (note) VALUES (%(msg)s) RETURNING id
+            INSERT INTO notes (note) VALUES (%(msg)s) RETURNING id;
         """
         params = {
             'msg': msg
@@ -33,7 +33,7 @@ class NotesDB:
         """
         
         query = """
-            SELECT * FROM notes;
+            SELECT * FROM notes ORDER BY id ASC;
         """
         self._execute(query)
         rows = self._cur.fetchall()
