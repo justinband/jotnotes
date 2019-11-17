@@ -11,25 +11,23 @@ class NotesDB:
 
 
     def _insert(self, msg: str):
-        '''
+        """
             Insert a message into the db
-        '''
+        """
 
         query = """
-            INSERT INTO notes (note) VALUES (%(msg)s);
+            INSERT INTO notes (note) VALUES (%(msg)s) RETURNING id
         """
         params = {
             'msg': msg
         }
         self._execute(query, params)
-        row = self._getNoteRecent()
-
-        return(row)
+        return(self._cur.fetchone()[0]) # Return id
 
     def _getAll(self):
-        '''
+        """
             Get ALL notes!
-        '''
+        """
         
         query = """
             SELECT * FROM notes;
@@ -39,10 +37,10 @@ class NotesDB:
         return(rows)
 
     def _getNoteRecent(self):
-        '''
+        """
             Get most recent note
             Used right after inserting (_insert) to return the row
-        '''
+        """
 
         query = """
             SELECT * FROM notes WHERE id=(

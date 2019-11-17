@@ -6,9 +6,9 @@ class NotesDAL:
         self._db = NotesDB()
 
     def insert(self, msg: str) -> Note:
-        print("DAL Insert")
-        note = self._db._insert(msg)
-        return(note)
+        id = self._db._insert(msg)
+        row = self._db._getNoteID(id)
+        return(Note(row[0], row[1]))
 
     def getNotes(self):
         notes = []
