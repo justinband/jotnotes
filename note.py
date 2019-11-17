@@ -7,6 +7,4 @@ class Note:
 
     def printMsg(self):
         print("{}. {}".format(self._id, self._msg))
-
         
-    
