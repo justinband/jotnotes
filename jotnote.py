@@ -26,16 +26,15 @@ def createNote():
     print("Inserted succesfully")
 
 def viewNotes():
-    """
-        Show all notes to user
-    """
     print("---- View Notes ----")
-    dal = NotesDAL()
-    dal.viewNotes()
 
     # Query database via DAL
+    dal = NotesDAL()
+    allNotes = dal.getNotes()
 
     # Output all notes in nice format
+    for note in allNotes:
+        note.printMsg()
 
 def deleteNote(noteId: int):
     """
