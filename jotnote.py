@@ -16,14 +16,11 @@ def createNote():
     dal = NotesDAL()
 
     msg = input("Enter your note: \n")
-    note = dal.insert(msg)
 
     # Enter note into database
-    #   Get an id back
-
-
-    # Use id and message to create a note object to display to user
-    print("Inserted succesfully")
+    #   Get Note obj back
+    note = dal.insert(msg)
+    print("\nNote #{} Inserted succesfully".format(note._id))
 
 def viewNotes():
     print("---- View Notes ----")
