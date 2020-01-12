@@ -1,4 +1,4 @@
-#Jot Note
+# Jot Note
 
 A tool to let you manage and view notes in the terminal!
 
